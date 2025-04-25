@@ -1,0 +1,57 @@
+// The Force Programming Language - Example Program
+
+// Define a Jedi class
+order Jedi {
+    initiate(self, name, rank) {
+        self.name = name
+        self.rank = rank
+        self.force_power = 50
+    }
+    
+    ability train(self) {
+        self.force_power = self.force_power + 10
+        respond self.name + " is training. Force power: " + str(self.force_power)
+    }
+    
+    ability use_the_force(self, target) {
+        respond self.name + " uses the Force on " + target
+    }
+}
+
+// Main function
+ability main() {
+    respond "A long time ago in a galaxy far, far away..."
+    
+    // Create a new Jedi
+    holocron luke = new Jedi("Luke", "Padawan")
+    
+    // Training loop
+    holocron days = 0
+    meditate (luke.force_power < 100) {
+        luke.train()
+        days = days + 1
+    }
+    
+    respond "Training complete after " + str(days) + " days"
+    
+    // Decision structure
+    sense (luke.force_power >= 100) {
+        respond "The Force is strong with this one"
+        luke.use_the_force("Training remote")
+    } else {
+        respond "More training required"
+    }
+    
+    // Array example
+    holocron missions = squadron["Tatooine", "Death Star", "Dagobah", "Endor"]
+    
+    respond "Upcoming missions:"
+    train (holocron i = 0; i < len(missions); i = i + 1) {
+        respond str(i+1) + ": " + missions[i]
+    }
+    
+    return "May the Force be with you"
+}
+
+// Run the program
+main()
