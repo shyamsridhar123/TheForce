@@ -28,8 +28,9 @@ Welcome to **The Force Programming Language** (TFPL), a Star Wars–themed domai
    - [Data Structures](#data-structures)
    - [I/O](#io)
 4. [Example Program](#example-program)
-5. [Contributing](#contributing)
-6. [License](#license)
+5. [PRD](#PRD)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ---
 
@@ -198,6 +199,9 @@ main()
 ```
 
 ---
+
+## PRD
+Please see the "the_force_prd.md" for information about key features and the roadmap.
 
 ## Contributing
 
