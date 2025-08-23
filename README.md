@@ -42,19 +42,70 @@ TFPL uses Star Wars terminology (Jedi, holocron, kyber) to teach programming con
 
 ## Getting Started
 
+### Web Interface (Recommended)
+
+Experience The Force in your browser with our Star Wars-themed web IDE:
+
 1. **Clone the repository**:
    ```bash
-   git clone https://your-repo-url.git
+   git clone https://github.com/shyamsridhar123/TheForce.git
    cd TheForce
    ```
-2. **Run a .force file**:
+
+2. **Start the web server**:
+   ```bash
+   python force_web_server.py
+   ```
+
+3. **Open your browser** to `http://localhost:8000` and start exploring The Force!
+
+### Command Line Interface
+
+1. **Run a .force file**:
    ```bash
    python force_compiler.py example.force
    ```
-3. **Interactive mode**:
+2. **Interactive mode**:
    ```bash
    python force_compiler.py --interactive
    ```
+
+---
+
+## Web Interface Features
+
+The Force Web IDE provides an immersive Star Wars-themed programming experience:
+
+### 🎮 **Interactive Code Editor**
+- Syntax highlighting for The Force language keywords
+- Real-time compilation to Python with visual feedback
+- Code execution with live output display
+- Auto-completion and error detection
+
+### 🌟 **Star Wars Theming** 
+- Space-themed background with animated stars
+- Jedi/Sith color palette and typography
+- Themed error messages and status updates
+- Force power meter that responds to code complexity
+
+### 📚 **Built-in Examples**
+- **Hello Galaxy**: Simple greeting program
+- **Jedi Training**: Class-based training simulation  
+- **Squadron Mission**: Array and object manipulation
+- Easy one-click loading of example code
+
+### ⚡ **Developer Features**
+- Quick reference guide for Force language syntax
+- Keyboard shortcuts (Ctrl+Enter to run, Ctrl+B to compile)
+- Responsive design for desktop and mobile
+- Real-time Python code translation view
+
+### 🚀 **Getting Started**
+Open the web interface and try these features:
+1. Click "Hello Galaxy" to load a simple example
+2. Press the "▶ Run Code" button to execute
+3. Watch the Python translation and output appear
+4. Modify the code and see your Force power increase!
 
 ---
 
