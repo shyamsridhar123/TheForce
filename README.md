@@ -88,6 +88,21 @@ TFPL uses Star Wars terminology (Jedi, holocron, kyber) to teach programming con
 | `transmission`      | import            | Import module           |
 | `from`              | from              | From-import             |
 
+### New Advanced Features
+
+| TFPL Keyword            | Python Equivalent    | Description                    |
+|-------------------------|----------------------|--------------------------------|
+| `force_calculate`       | math operations      | Mathematical calculations      |
+| `midichlorians`         | random functions     | Random number generation       |
+| `lightsaber_distance`   | distance calc        | Calculate distance/length      |
+| `rebellion[...]`        | set{...}             | Set literal                    |
+| `jedi_mind_trick`       | ternary operator     | Conditional expressions        |
+| `hologram_text`         | f-strings            | String formatting              |
+| `protocol_droid`        | text functions       | Text processing operations     |
+| `holocron_archive`      | file reading         | Read file contents             |
+| `imperial_database`     | file writing         | Write content to file          |
+| `hyperdrive`            | generators           | Create generators/iterators    |
+
 ### Variables & Constants
 
 ```force
@@ -163,10 +178,76 @@ squad[0]  // 1
 datapad {a:1, b:2}
 ``` 
 
+#### Sets (Rebellion)
+```force
+holocron unique_planets = rebellion["Tatooine", "Coruscant", "Dagobah"]
+```
+
+### Mathematical Operations
+
+#### Basic Calculations
+```force
+holocron sum = force_calculate("add", 10, 15)        // 25
+holocron product = force_calculate("multiply", 6, 7)  // 42
+holocron power = force_calculate("power", 2, 8)      // 256
+```
+
+#### Random Numbers (Midichlorians)
+```force
+holocron random_val = midichlorians()                // 0.0 to 1.0
+holocron dice_roll = midichlorians(1, 6)            // 1 to 6
+holocron reading = midichlorians(1000, 50000)       // Jedi midichlorian count
+```
+
+#### Distance Calculations
+```force
+holocron combat_range = lightsaber_distance(0, 0, 10, 15)  // 18.03 meters
+```
+
+### Advanced Control Flow
+
+#### Ternary Operations (Jedi Mind Tricks)
+```force
+holocron status = jedi_mind_trick(power > 50, "Strong", "Weak")
+```
+
+### Text Processing (Protocol Droid)
+
+```force
+holocron message = "May the Force be with you"
+respond protocol_droid("uppercase", message)  // MAY THE FORCE BE WITH YOU
+respond protocol_droid("reverse", message)    // uoy htiw eb ecroF eht yaM
+respond protocol_droid("length", message)     // 25
+```
+
+### File Operations
+
+#### Holocron Archives (File Reading)
+```force
+holocron content = holocron_archive("jedi_wisdom.txt")
+```
+
+#### Imperial Database (File Writing)
+```force
+imperial_database("report.txt", "Mission accomplished")
+``` 
+
 ### I/O
 
 - Output: `respond "..."`
 - Input: `holocron name = sense_input("Enter:")`
+
+### Enhanced Error Handling
+
+The Force provides themed error messages that make debugging more engaging:
+
+- **Syntax errors**: "The dark side clouds your syntax"
+- **Name errors**: "These aren't the variables you're looking for"
+- **Type errors**: "Your lack of type faith is disturbing"  
+- **File errors**: "The archives are incomplete"
+- **Zero division**: "Even the Force cannot divide by zero"
+- **Index errors**: "These aren't the indices you're looking for"
+- **Key errors**: "The key to the Force you seek, exists it does not"
 
 ---
 
