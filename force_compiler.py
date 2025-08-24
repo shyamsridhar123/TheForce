@@ -133,11 +133,11 @@ class ForceParser:
                 else:
                     result_lines.append(line)
             content = ',\n    '.join(result_lines)
+            return '{\n    ' + content + '\n}'
         else:
-            # Single line - just replace property names with quoted strings
+            # Single line - just replace property names with quoted strings and keep on one line
             content = re.sub(r'(\w+):', r'"\1":', content)
-        
-        return '{\n    ' + content + '\n}'
+            return '{' + content + '}'
     
     def _handle_format(self, match) -> str:
         """Convert hologram_text string formatting to Python f-string"""
@@ -277,8 +277,27 @@ class ForceParser:
         # First, handle } else { patterns specially - put else on new line
         code = re.sub(r'\s*\}\s*else\s*\{\s*$', '\nelse:', code, flags=re.MULTILINE)
         
-        # Replace opening braces with colons
-        code = re.sub(r'\s*\{\s*$', ':', code, flags=re.MULTILINE)
+        # Replace opening braces with colons, but protect dictionary literals
+        # Dictionary literals are on single lines with = and both { and }
+        lines = code.split('\n')
+        result_lines = []
+        
+        for line in lines:
+            stripped = line.strip()
+            # Check if this line is a single-line dictionary literal 
+            if ('=' in stripped and 
+                '{' in stripped and 
+                '}' in stripped and 
+                stripped.count('{') == stripped.count('}') and
+                stripped.endswith('}')):
+                # This is a dictionary literal, don't convert braces
+                result_lines.append(line)
+            else:
+                # Convert opening braces to colons for control structures
+                line = re.sub(r'\s*\{\s*$', ':', line)
+                result_lines.append(line)
+        
+        code = '\n'.join(result_lines)
         
         lines = code.split('\n')
         result_lines = []
