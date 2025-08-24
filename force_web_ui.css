@@ -386,7 +386,7 @@ body::before {
 
 /* Editor Container */
 .editor-container {
-    height: 400px;
+    height: 600px;
     position: relative;
 }
 
@@ -608,6 +608,10 @@ body::before {
     .output-section {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+    
+    .editor-container {
+        height: 450px;
     }
     
     .title {
