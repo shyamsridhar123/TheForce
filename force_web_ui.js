@@ -282,6 +282,7 @@ class ForceUI {
         const example = this.examples[exampleKey];
         if (example) {
             this.setEditorContent(example.code);
+            this.clearOutput(); // Clear previous output when loading new example
             this.updateStatus(`Loaded example: ${example.name}`);
             this.animateForcePower(40); // Boost power for loading examples
         }
