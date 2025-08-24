@@ -60,6 +60,7 @@ class ForceWebHandler(BaseHTTPRequestHandler):
         examples = {
             'hello_galaxy': {
                 'name': 'Hello Galaxy',
+                'description': 'A simple greeting from a galaxy far, far away',
                 'code': '''// A simple greeting from a galaxy far, far away
 ability main() {
     respond "Hello, Galaxy!"
@@ -70,6 +71,7 @@ main()'''
             },
             'jedi_training': {
                 'name': 'Jedi Training',
+                'description': 'Training simulation for young Padawans with classes and loops',
                 'code': '''// Training simulation for young Padawans
 order Jedi {
     initiate(self, name) {
@@ -107,6 +109,7 @@ main()'''
             },
             'squadron_mission': {
                 'name': 'Squadron Mission',
+                'description': 'Rebel Alliance mission planning with arrays and dictionaries',
                 'code': '''// Rebel Alliance mission planning
 ability main() {
     respond "Rebel Alliance Mission Briefing"
@@ -120,16 +123,111 @@ ability main() {
         respond pilots[i] + " flying " + ships[i]
     }
     
-    // Mission data
-    holocron mission = datapad {
-        target: "Death Star",
-        status: "In Progress",
-        survivors: 1
-    }
-    
-    respond "Mission: " + mission["target"]
-    respond "Status: " + mission["status"]
+    respond "Mission: Death Star assault"
+    respond "Status: Ready for launch"
     respond "May the Force be with them all"
+}
+
+main()'''
+            },
+            'data_structures': {
+                'name': 'Advanced Data Structures',
+                'description': 'Demonstration of stacks, queues, and other data structures',
+                'code': '''// Advanced data structures demonstration
+ability main() {
+    respond "=== Advanced Data Structures Demo ==="
+    
+    // Stack example - Jedi Council members
+    respond "Stack Operations (Last In, First Out):"
+    holocron council_stack = stack_tower(squadron["Yoda", "Mace Windu", "Obi-Wan"])
+    council_stack.push("Ki-Adi-Mundi")
+    respond "Stack size: " + str(council_stack.size())
+    respond "Top member: " + council_stack.peek()
+    respond "Removing: " + council_stack.pop()
+    respond "New top: " + council_stack.peek()
+    
+    // Queue example - Cantina service
+    respond ""
+    respond "Queue Operations (First In, First Out):"
+    holocron cantina_queue = queue_line(squadron["Han", "Leia", "Chewbacca"])
+    cantina_queue.enqueue("Lando")
+    respond "Queue size: " + str(cantina_queue.size())
+    respond "Next customer: " + cantina_queue.front()
+    respond "Serving: " + cantina_queue.dequeue()
+    respond "New next: " + cantina_queue.front()
+}
+
+main()'''
+            },
+            'text_processing': {
+                'name': 'Text & String Processing',
+                'description': 'Advanced text processing with regex and string manipulation',
+                'code': '''// Text and string processing demo
+ability main() {
+    respond "=== Text Processing Demo ==="
+    
+    holocron jedi_quote = "Do or do not, there is no try"
+    
+    // Basic text operations
+    respond "Original: " + jedi_quote
+    respond "Uppercase: " + protocol_droid("uppercase", jedi_quote)
+    respond "Reversed: " + protocol_droid("reverse", jedi_quote)
+    respond "Length: " + protocol_droid("length", jedi_quote)
+    
+    // String formatting
+    holocron padawan_name = "Ahsoka Tano"
+    respond hologram_text("Welcome, {}! Ready for training?", padawan_name)
+    
+    // Regular expressions
+    holocron force_wisdom = "Fear leads to anger, anger leads to hate"
+    respond "Contains 'anger': " + str(regex_pattern("search", "anger", force_wisdom))
+    holocron words = regex_pattern("findall", "\\w+", force_wisdom)
+    respond "Word count: " + str(len(words))
+}
+
+main()'''
+            },
+            'security_demo': {
+                'name': 'Security & Encryption',
+                'description': 'Demonstrate encryption, hashing, and security functions',
+                'code': '''// Security and encryption demonstration
+ability main() {
+    respond "=== Security Operations Demo ==="
+    
+    holocron secret_message = "The Death Star plans are hidden here"
+    respond "Secret message: " + secret_message
+    
+    // Base64 encoding/decoding
+    holocron encoded = force_encrypt("base64_encode", secret_message)
+    respond "Encoded: " + encoded
+    
+    holocron decoded = force_encrypt("base64_decode", encoded)
+    respond "Decoded: " + decoded
+    
+    // Hash functions for integrity
+    holocron message_hash = force_hash("sha256", secret_message)
+    respond "SHA256 hash: " + message_hash
+    
+    respond "Security demo complete!"
+}
+
+main()'''
+            },
+            'datetime_operations': {
+                'name': 'Date & Time Operations',
+                'description': 'Working with galactic time and timestamps',
+                'code': '''// Date and time operations
+ability main() {
+    respond "=== Galactic Time Operations ==="
+    
+    // Current time operations
+    holocron current_time = galactic_time("now")
+    respond "Current galactic time: " + current_time
+    
+    holocron timestamp = galactic_time("timestamp")
+    respond "Current timestamp: " + str(timestamp)
+    
+    respond "Time operations complete!"
 }
 
 main()'''

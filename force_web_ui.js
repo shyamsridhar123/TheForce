@@ -13,6 +13,7 @@ class ForceUI {
     async init() {
         this.setupEditor();
         this.setupEventListeners();
+        this.setupTheme();
         await this.loadExamples();
         this.updateStatus('Ready to explore The Force');
         this.animateForcePower(25); // Start with some base power
@@ -61,7 +62,10 @@ class ForceUI {
             'order', 'ability', 'holocron', 'kyber', 'respond', 'sense', 'meditate', 
             'train', 'squadron', 'datapad', 'new', 'self', 'initiate', 'else',
             'try_use_force', 'catch_disturbance', 'finally_balance', 'transmission',
-            'from', 'return'
+            'from', 'return', 'stack_tower', 'queue_line', 'tuple_coordinates',
+            'protocol_droid', 'hologram_text', 'regex_pattern', 'galactic_time',
+            'data_stream', 'force_encrypt', 'force_hash', 'jedi_mind_trick',
+            'jedi_council', 'hyperspace_comm', 'rebellion'
         ];
         
         // Add custom highlighting overlay
@@ -104,6 +108,8 @@ class ForceUI {
         document.getElementById('compile-btn').addEventListener('click', () => this.compileCode());
         document.getElementById('run-btn').addEventListener('click', () => this.runCode());
         document.getElementById('clear-btn').addEventListener('click', () => this.clearEditor());
+        document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+        document.getElementById('export-btn').addEventListener('click', () => this.exportCode());
         
         // Example buttons
         document.addEventListener('click', (e) => {
@@ -140,6 +146,14 @@ class ForceUI {
                     case 'k':
                         e.preventDefault();
                         this.clearEditor();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        this.exportCode();
+                        break;
+                    case 't':
+                        e.preventDefault();
+                        this.toggleTheme();
                         break;
                 }
             }
@@ -436,6 +450,56 @@ class ForceUI {
         
         animate();
     }
+    
+    setupTheme() {
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('force-theme') || 'dark';
+        this.setTheme(savedTheme);
+    }
+    
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+    }
+    
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('force-theme', theme);
+        
+        const themeButton = document.getElementById('theme-toggle');
+        const icon = themeButton.querySelector('.btn-icon');
+        
+        if (theme === 'light') {
+            icon.textContent = '☀️';
+            themeButton.title = 'Switch to Dark Theme';
+        } else {
+            icon.textContent = '🌙';
+            themeButton.title = 'Switch to Light Theme';
+        }
+    }
+    
+    exportCode() {
+        const code = this.getEditorContent();
+        if (!code.trim()) {
+            this.updateStatus('No code to export', 'warning');
+            return;
+        }
+        
+        // Create a downloadable file
+        const blob = new Blob([code], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'force_program.force';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        this.updateStatus('Code exported successfully', 'success');
+    }
 }
 
 // Initialize the UI when the page loads
@@ -459,6 +523,16 @@ document.addEventListener('DOMContentLoaded', () => {
     • Ctrl+Enter / Cmd+Enter: Run code
     • Ctrl+B / Cmd+B: Compile code  
     • Ctrl+K / Cmd+K: Clear editor
+    • Ctrl+S / Cmd+S: Export code
+    • Ctrl+T / Cmd+T: Toggle theme
+    
+    New Features Added:
+    • Advanced data structures (stacks, queues)
+    • JSON processing (data_stream)
+    • Date/time operations (galactic_time)
+    • Encryption functions (force_encrypt)
+    • Regular expressions (regex_pattern)
+    • Hash functions (force_hash)
     `);
 });
 

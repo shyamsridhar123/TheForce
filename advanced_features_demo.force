@@ -1,0 +1,117 @@
+// Advanced Features Demo for The Force Programming Language
+// Demonstrates new advanced features and libraries
+
+ability main() {
+    respond "=== The Force Programming Language - Advanced Features Demo ==="
+    respond ""
+    
+    // Data Structures Demo
+    demonstrate_data_structures()
+    
+    // String and Text Processing Demo
+    demonstrate_text_processing()
+    
+    // Date/Time Operations Demo  
+    demonstrate_datetime()
+    
+    // Security Operations Demo
+    demonstrate_security()
+    
+    respond ""
+    respond "=== Demo Complete - The Force is strong with these features! ==="
+}
+
+ability demonstrate_data_structures() {
+    respond "--- Data Structures Demo ---"
+    
+    // Stack Operations
+    respond "Stack Operations:"
+    holocron jedi_stack = stack_tower(squadron["Yoda", "Obi-Wan", "Luke"])
+    jedi_stack.push("Rey")
+    respond "Stack size after adding Rey: " + str(jedi_stack.size())
+    respond "Top Jedi: " + jedi_stack.peek()
+    respond "Removing top Jedi: " + jedi_stack.pop()
+    respond "New top Jedi: " + jedi_stack.peek()
+    
+    // Queue Operations
+    respond ""
+    respond "Queue Operations:"
+    holocron rebel_queue = queue_line(squadron["Leia", "Han", "Chewbacca"])
+    rebel_queue.enqueue("Lando")
+    respond "Queue size after adding Lando: " + str(rebel_queue.size())
+    respond "First in line: " + rebel_queue.front()
+    respond "Serving: " + rebel_queue.dequeue()
+    respond "New first in line: " + rebel_queue.front()
+    respond ""
+}
+
+ability demonstrate_text_processing() {
+    respond "--- Text Processing Demo ---"
+    
+    holocron jedi_message = "May the Force be with you"
+    
+    // Basic text operations
+    respond "Original: " + jedi_message
+    respond "Uppercase: " + protocol_droid("uppercase", jedi_message)
+    respond "Reversed: " + protocol_droid("reverse", jedi_message)
+    respond "Length: " + protocol_droid("length", jedi_message)
+    
+    // String formatting
+    holocron jedi_name = "Luke Skywalker" 
+    respond hologram_text("Greetings, {}! Welcome to the Rebellion.", jedi_name)
+    
+    // Regular expressions
+    holocron jedi_text = "The Force flows through all living things"
+    respond "Contains 'Force': " + str(regex_pattern("search", "Force", jedi_text))
+    holocron words = regex_pattern("findall", "\\w+", jedi_text)
+    respond "Word count: " + str(len(words))
+    respond ""
+}
+
+ability demonstrate_datetime() {
+    respond "--- Date/Time Operations Demo ---"
+    
+    holocron current_time = galactic_time("now")
+    respond "Current galactic time: " + current_time
+    
+    holocron timestamp = galactic_time("timestamp")
+    respond "Current timestamp: " + str(timestamp)
+    respond ""
+}
+
+ability demonstrate_security() {
+    respond "--- Security Operations Demo ---"
+    
+    holocron secret_message = "The plans are in the main computer"
+    
+    // Base64 encoding
+    holocron encoded = force_encrypt("base64_encode", secret_message)
+    respond "Encoded message: " + encoded
+    
+    holocron decoded = force_encrypt("base64_decode", encoded)
+    respond "Decoded message: " + decoded
+    
+    // Hash functions
+    holocron message_hash = force_hash("sha256", secret_message)
+    respond "SHA256 hash: " + message_hash
+    respond ""
+}
+
+// Switch-case example using Jedi Council decision making
+ability jedi_council_decision(situation) {
+    holocron decision = jedi_mind_trick(situation == "dark_side_threat", "Send multiple Jedi Knights",
+                        jedi_mind_trick(situation == "diplomatic_mission", "Send a Jedi Ambassador",
+                        jedi_mind_trick(situation == "training_request", "Assign a Padawan to a Master", 
+                        "Meditate on this, we must")))
+    respond "Council decision for '" + situation + "': " + decision
+}
+
+// Run the main demo
+main()
+
+// Test the Jedi Council decision system
+respond ""
+respond "--- Jedi Council Decisions Demo ---"
+jedi_council_decision("dark_side_threat")
+jedi_council_decision("diplomatic_mission") 
+jedi_council_decision("mysterious_event")
