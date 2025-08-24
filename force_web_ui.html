@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Force Programming Language - Web Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span class="force-text">THE FORCE</span>
+                <span class="subtitle">Programming Language</span>
+            </h1>
+            <p class="tagline">A long time ago in a galaxy far, far away...</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="section">
+                    <h3 class="section-title">Examples</h3>
+                    <div class="examples-list">
+                        <button class="example-btn" data-example="hello_galaxy">Hello Galaxy</button>
+                        <button class="example-btn" data-example="jedi_training">Jedi Training</button>
+                        <button class="example-btn" data-example="squadron_mission">Squadron Mission</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Quick Reference</h3>
+                    <div class="reference">
+                        <div class="ref-item">
+                            <span class="ref-keyword">order</span>
+                            <span class="ref-desc">class definition</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">ability</span>
+                            <span class="ref-desc">function definition</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">holocron</span>
+                            <span class="ref-desc">variable declaration</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">respond</span>
+                            <span class="ref-desc">print output</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">sense</span>
+                            <span class="ref-desc">if condition</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">meditate</span>
+                            <span class="ref-desc">while loop</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">train</span>
+                            <span class="ref-desc">for loop</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">squadron</span>
+                            <span class="ref-desc">array/list</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-keyword">datapad</span>
+                            <span class="ref-desc">dictionary/object</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h3>Force Code Editor</h3>
+                    <div class="controls">
+                        <button id="compile-btn" class="action-btn primary">
+                            <span class="btn-icon">⚡</span>
+                            Compile to Python
+                        </button>
+                        <button id="run-btn" class="action-btn secondary">
+                            <span class="btn-icon">▶</span>
+                            Run Code
+                        </button>
+                        <button id="clear-btn" class="action-btn tertiary">
+                            <span class="btn-icon">🗑</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <textarea id="force-editor" placeholder="// Write your Force code here...
+// May the Force be with you!
+
+ability main() {
+    respond &quot;Hello from The Force!&quot;
+}
+
+main()"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="output-section">
+            <div class="output-panel">
+                <div class="panel-header">
+                    <h3>Python Translation</h3>
+                </div>
+                <div class="output-container">
+                    <pre id="python-output" class="output-content">Compiled Python code will appear here...</pre>
+                </div>
+            </div>
+
+            <div class="output-panel">
+                <div class="panel-header">
+                    <h3>Execution Results</h3>
+                </div>
+                <div class="output-container">
+                    <pre id="execution-output" class="output-content">Program output will appear here...</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-info">
+                <span id="status-text">Ready to explore The Force</span>
+            </div>
+            <div class="force-power">
+                <span class="power-label">Force Power:</span>
+                <div class="power-bar">
+                    <div id="power-level" class="power-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>The Dark Side Clouds Everything</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
