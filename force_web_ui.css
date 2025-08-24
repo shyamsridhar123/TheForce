@@ -1,7 +1,7 @@
 /* The Force Programming Language - Star Wars Themed CSS */
 
 :root {
-    /* Color palette inspired by Star Wars */
+    /* Color palette inspired by Star Wars - Dark Theme */
     --force-blue: #00d4ff;
     --sith-red: #ff073a;
     --jedi-green: #00ff41;
@@ -16,6 +16,39 @@
     --success-glow: #00ff41;
     --error-glow: #ff073a;
     --warning-glow: #ffa500;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --force-blue: #0066cc;
+    --sith-red: #cc0022;
+    --jedi-green: #00cc33;
+    --galaxy-purple: #8866bb;
+    --space-black: #ffffff;
+    --star-white: #333333;
+    --panel-dark: #f8f9fa;
+    --panel-medium: #e9ecef;
+    --panel-light: #dee2e6;
+    --text-dim: #6c757d;
+    --border-glow: #0066cc;
+    --success-glow: #28a745;
+    --error-glow: #dc3545;
+    --warning-glow: #fd7e14;
+}
+
+/* Light theme specific adjustments */
+[data-theme="light"] body {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+}
+
+[data-theme="light"] body::before {
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #666, transparent),
+        radial-gradient(2px 2px at 40px 70px, #666, transparent),
+        radial-gradient(1px 1px at 90px 40px, #666, transparent),
+        radial-gradient(1px 1px at 130px 80px, #666, transparent),
+        radial-gradient(2px 2px at 160px 30px, #666, transparent);
+    opacity: 0.1;
 }
 
 * {
@@ -145,7 +178,7 @@ body::before {
     padding-bottom: 5px;
 }
 
-/* Examples List */
+/* Examples List Enhanced */
 .examples-list {
     display: flex;
     flex-direction: column;
@@ -176,21 +209,59 @@ body::before {
     transform: translateY(0);
 }
 
-/* Reference Styles */
+.example-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.example-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+/* Reference Styles Enhanced */
 .reference {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 15px;
+}
+
+.ref-group {
+    background: var(--panel-medium);
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid rgba(74, 158, 255, 0.2);
+}
+
+.ref-group-title {
+    font-weight: 600;
+    color: var(--force-blue);
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .ref-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
-    background: var(--panel-medium);
+    padding: 6px 8px;
+    background: var(--panel-dark);
     border-radius: 4px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+}
+
+.ref-item:hover {
+    background: var(--panel-light);
+    border: 1px solid rgba(74, 158, 255, 0.3);
+}
+
+.ref-item:last-child {
+    margin-bottom: 0;
 }
 
 .ref-keyword {
@@ -201,7 +272,7 @@ body::before {
 
 .ref-desc {
     color: var(--text-dim);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 /* Editor Panel */
@@ -286,6 +357,30 @@ body::before {
 .action-btn.tertiary:hover {
     color: var(--star-white);
     border-color: var(--force-blue);
+    transform: translateY(-2px);
+}
+
+.action-btn.quaternary {
+    background: linear-gradient(135deg, var(--galaxy-purple), #8a2be2);
+    color: white;
+    box-shadow: 0 2px 10px rgba(177, 156, 217, 0.3);
+}
+
+.action-btn.quaternary:hover {
+    box-shadow: 0 4px 15px rgba(177, 156, 217, 0.5);
+    transform: translateY(-2px);
+}
+
+.action-btn.theme-btn {
+    background: linear-gradient(135deg, var(--warning-glow), #ff8c00);
+    color: white;
+    box-shadow: 0 2px 10px rgba(255, 165, 0, 0.3);
+    min-width: auto;
+    padding: 8px 12px;
+}
+
+.action-btn.theme-btn:hover {
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.5);
     transform: translateY(-2px);
 }
 
