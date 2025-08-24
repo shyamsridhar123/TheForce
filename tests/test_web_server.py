@@ -24,8 +24,8 @@ class TestForceWebServer(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test server"""
-        cls.port = 8888  # Use different port for testing
-        cls.server = HTTPServer(('localhost', cls.port), ForceWebHandler)
+        cls.server = HTTPServer(('localhost', 0), ForceWebHandler)  # Use port 0 for dynamic allocation
+        cls.port = cls.server.server_address[1]  # Get the actual port assigned
         
         # Start server in a separate thread
         cls.server_thread = threading.Thread(target=cls.server.serve_forever)
