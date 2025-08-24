@@ -649,9 +649,12 @@ class ForceRuntime:
             # Execute the code in the global namespace
             exec(compiled_code, self.globals)
             
-            # If there's a main function, call it
+            # If there's a main function and the code doesn't already call it, call it
+            # Check if the code already contains a main() call
             if 'main' in self.globals and callable(self.globals['main']):
-                return self.globals['main']()
+                # Only call main() if it's not already called in the code
+                if 'main()' not in python_code.strip():
+                    return self.globals['main']()
             
             return "Code executed successfully - The Force is strong with this one"
         except SyntaxError as e:
@@ -694,11 +697,11 @@ class ForceInterpreter:
         """Parse and run Force code"""
         python_code = self.parser.translate_to_python(force_code)
         
-        # Uncomment to debug the Python translation
-        print("Translated Python code:")
-        print("----------------------")
-        print(python_code)
-        print("----------------------")
+        # Debug output disabled for web interface - uncomment for debugging
+        # print("Translated Python code:")
+        # print("----------------------")
+        # print(python_code)
+        # print("----------------------")
         
         return self.runtime.run_code(python_code)
     
