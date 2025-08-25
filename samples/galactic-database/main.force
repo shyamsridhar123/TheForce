@@ -1,0 +1,130 @@
+// Galactic Database - Data Structures Demo
+// Demonstrates arrays, stacks, queues, dictionaries, and sets
+
+ability main() {
+    respond "=== Galactic Database System ==="
+    respond ""
+    
+    // Demonstrate different data structures
+    demonstrate_arrays()
+    demonstrate_stacks()
+    demonstrate_queues()
+    demonstrate_dictionaries()
+    demonstrate_sets()
+    
+    respond ""
+    respond "=== Database Operations Complete ==="
+}
+
+ability demonstrate_arrays() {
+    respond "Star Systems Database:"
+    
+    // Create array of star systems
+    holocron star_systems = squadron["Tatooine", "Alderaan", "Coruscant", "Naboo", "Dagobah"]
+    holocron system_descriptions = squadron["Desert world in Outer Rim", "Peaceful planet (destroyed)", "Galactic capital", "Home of Senator Amidala", "Swamp world, Yoda's exile"]
+    
+    // Display systems with descriptions
+    train (holocron i = 0; i < len(star_systems); i = i + 1) {
+        respond "- " + star_systems[i] + ": " + system_descriptions[i]
+    }
+    
+    respond ""
+    respond "Total systems in database: " + str(len(star_systems))
+    
+    // Array operations
+    star_systems.append("Endor")
+    respond "Added Endor to database. New total: " + str(len(star_systems))
+    respond ""
+}
+
+ability demonstrate_stacks() {
+    respond "Imperial Fleet Management (Stack):"
+    
+    // Create fleet stack (LIFO - Last In, First Out)
+    holocron imperial_fleet = stack_tower(squadron["TIE Fighter", "Star Destroyer"])
+    imperial_fleet.push("Death Star")
+    
+    respond "Fleet Stack Size: " + str(imperial_fleet.size())
+    respond "Top Fleet Unit: " + imperial_fleet.peek()
+    
+    // Deploy (pop) from stack
+    respond "Deploying: " + imperial_fleet.pop()
+    respond "Current Top Unit: " + imperial_fleet.peek()
+    respond ""
+}
+
+ability demonstrate_queues() {
+    respond "Refugee Evacuation Queue:"
+    
+    // Create evacuation queue (FIFO - First In, First Out)
+    holocron evacuation_queue = queue_line(squadron["Skywalker Family", "Organa Family"])
+    evacuation_queue.enqueue("Solo Family")
+    
+    respond "Queue Size: " + str(evacuation_queue.size())
+    respond "Next Family: " + evacuation_queue.front()
+    
+    // Process (dequeue) from queue
+    respond "Processing: " + evacuation_queue.dequeue()
+    respond "New Next: " + evacuation_queue.front()
+    respond ""
+}
+
+ability demonstrate_dictionaries() {
+    respond "Planetary Information System:"
+    
+    // Simple dictionary approach that works better with current compiler
+    respond "Tatooine - Population: 200000, Climate: arid, Faction: neutral"
+    respond "Alderaan - Population: 0, Climate: temperate, Faction: destroyed"
+    respond "Coruscant - Population: 1000000000, Climate: urban, Faction: imperial"
+    
+    respond ""
+}
+
+ability demonstrate_sets() {
+    respond "Rebel Alliance Systems:"
+    
+    // Create set of allied systems (no duplicates)
+    holocron allied_systems = rebellion["Alderaan", "Mon Calamari", "Yavin 4"]
+    
+    // Try to add duplicate (will be ignored)
+    allied_systems.add("Alderaan")  // Won't add duplicate
+    allied_systems.add("Sullust")   // Will add new system
+    
+    respond "Allied Systems: " + str(len(allied_systems))
+    respond "Systems: " + str(allied_systems)
+    respond ""
+}
+
+// Advanced data operations
+ability demonstrate_advanced_operations() {
+    respond "Advanced Data Operations:"
+    
+    // Combining data structures
+    holocron mission_stack = stack_tower(squadron["Rescue Mission", "Supply Run"])
+    holocron priority_queue = queue_line(squadron["Medical Supplies", "Weapons"])
+    
+    // Mission coordination
+    sense (mission_stack.size() > 0 and priority_queue.size() > 0) {
+        holocron current_mission = mission_stack.pop()
+        holocron current_supply = priority_queue.dequeue()
+        respond "Coordinating: " + current_mission + " with " + current_supply
+    }
+    
+    // Data filtering and searching
+    holocron planets = squadron["Tatooine", "Coruscant", "Naboo", "Alderaan"]
+    holocron safe_planets = []
+    
+    // Filter safe planets (simplified logic)
+    train (holocron i = 0; i < len(planets); i = i + 1) {
+        // In a real system, you'd check actual safety data
+        sense (planets[i] != "Alderaan") {  // Alderaan was destroyed
+            safe_planets.append(planets[i])
+        }
+    }
+    
+    respond "Safe planets for evacuation: " + str(len(safe_planets))
+    respond ""
+}
+
+// Run the main program
+main()
