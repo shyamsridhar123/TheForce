@@ -1,0 +1,298 @@
+// Mission Control - Complex Integrated Application
+// Demonstrates the full power of The Force Programming Language
+
+// Mission class for tracking individual operations
+order Mission {
+    initiate(self, name, commander, priority, eta) {
+        self.name = name
+        self.commander = commander
+        self.priority = priority  // URGENT, HIGH, MEDIUM, LOW
+        self.eta = eta
+        self.status = "ACTIVE"
+        self.progress = 0
+    }
+    
+    ability get_status(self) {
+        respond "[" + self.priority + "] " + self.name + " - " + self.commander + " - ETA: " + str(self.eta) + " hours"
+    }
+    
+    ability update_progress(self, new_progress) {
+        self.progress = new_progress
+        sense (self.progress >= 100) {
+            self.status = "COMPLETED"
+            respond "Mission " + self.name + " completed successfully!"
+        }
+    }
+}
+
+// Personnel management class
+order Personnel {
+    initiate(self, name, role, status) {
+        self.name = name
+        self.role = role
+        self.status = status  // Available, On Mission, Injured, Off Duty
+        self.missions_completed = 0
+    }
+    
+    ability assign_mission(self, mission_name) {
+        sense (self.status == "Available") {
+            self.status = "On Mission"
+            respond self.name + " assigned to " + mission_name
+        } else {
+            respond self.name + " is not available for assignment"
+        }
+    }
+    
+    ability complete_mission(self) {
+        self.status = "Available"
+        self.missions_completed = self.missions_completed + 1
+        respond self.name + " mission completed. Total missions: " + str(self.missions_completed)
+    }
+    
+    ability get_status(self) {
+        respond "- " + self.name + ": " + self.status + " - " + self.role
+    }
+}
+
+// Resource management class
+order ResourceManager {
+    initiate(self) {
+        self.xwing_fighters = 12
+        self.transport_ships = 5
+        self.fuel_reserves = 85
+        self.medical_supplies = 92
+    }
+    
+    ability allocate_resources(self, mission_type) {
+        sense (mission_type == "Combat") {
+            sense (self.xwing_fighters > 0) {
+                self.xwing_fighters = self.xwing_fighters - 1
+                respond "X-Wing fighter allocated. Remaining: " + str(self.xwing_fighters)
+            } else {
+                respond "No X-Wing fighters available!"
+            }
+        } else {
+            sense (mission_type == "Transport") {
+                sense (self.transport_ships > 0) {
+                    self.transport_ships = self.transport_ships - 1
+                    respond "Transport ship allocated. Remaining: " + str(self.transport_ships)
+                } else {
+                    respond "No transport ships available!"
+                }
+            }
+        }
+    }
+    
+    ability show_status(self) {
+        respond "RESOURCE ALLOCATION:"
+        respond "- X-Wing Fighters: " + str(self.xwing_fighters) + " available"
+        respond "- Transport Ships: " + str(self.transport_ships) + " available"
+        respond "- Fuel Reserves: " + str(self.fuel_reserves) + "% capacity"
+        respond "- Medical Supplies: " + str(self.medical_supplies) + "% stocked"
+    }
+}
+
+// Intelligence analysis class
+order Intelligence {
+    initiate(self) {
+        self.threat_level = "MODERATE"
+        self.active_alerts = 0
+    }
+    
+    ability analyze_message(self, encrypted_message) {
+        // Decrypt the message
+        holocron decoded = force_encrypt("base64_decode", encrypted_message)
+        respond "Encrypted message decoded: \"" + decoded + "\""
+        
+        // Analyze threat level
+        holocron is_urgent = regex_pattern("search", "Death Star|Empire|attack", decoded)
+        sense (is_urgent) {
+            self.threat_level = "CRITICAL"
+            self.active_alerts = self.active_alerts + 1
+            respond "Threat level: CRITICAL"
+            respond "Recommended action: Immediate evacuation protocol"
+        } else {
+            respond "Threat level: " + self.threat_level
+        }
+    }
+    
+    ability generate_report(self) {
+        respond "INTELLIGENCE ANALYSIS:"
+        respond "- Active alerts: " + str(self.active_alerts)
+        respond "- Current threat level: " + self.threat_level
+        
+        // Generate security hash for report integrity
+        holocron report_data = "Alerts:" + str(self.active_alerts) + "Threat:" + self.threat_level
+        holocron report_hash = force_hash("sha256", report_data)
+        respond "- Report verification: " + report_hash
+    }
+}
+
+// Main Mission Control system
+order MissionControl {
+    initiate(self) {
+        self.personnel_count = 0
+        self.active_missions = 0
+        self.systems_online = 12
+        
+        // Initialize subsystems
+        self.resources = new ResourceManager()
+        self.intelligence = new Intelligence()
+        
+        // Mission and personnel lists
+        self.mission_queue = queue_line([])
+        self.personnel_roster = []
+    }
+    
+    ability initialize_system(self) {
+        respond "=== Rebel Alliance Mission Control ==="
+        respond "Initializing systems..."
+        
+        // Load personnel
+        self.load_personnel()
+        
+        // Initialize missions
+        self.initialize_missions()
+        
+        respond "Resource allocation complete: " + str(self.systems_online) + " systems online"
+        respond ""
+    }
+    
+    ability load_personnel(self) {
+        // Create key personnel
+        holocron luke = new Personnel("Luke Skywalker", "Pilot/Jedi", "Available")
+        holocron leia = new Personnel("Princess Leia", "Intelligence", "On Mission")
+        holocron han = new Personnel("Han Solo", "Transport", "On Mission")
+        holocron chewie = new Personnel("Chewbacca", "Co-pilot", "Available")
+        
+        self.personnel_roster.append(luke)
+        self.personnel_roster.append(leia)
+        self.personnel_roster.append(han)
+        self.personnel_roster.append(chewie)
+        
+        self.personnel_count = len(self.personnel_roster)
+        respond "Personnel database loaded: " + str(self.personnel_count + 21) + " operatives"  // Simulate larger roster
+    }
+    
+    ability initialize_missions(self) {
+        // Create priority missions
+        holocron mission1 = new Mission("Death Star Intelligence", "Princess Leia", "URGENT", 2)
+        holocron mission2 = new Mission("Rebel Base Defense", "General Dodonna", "HIGH", 6)
+        holocron mission3 = new Mission("Supply Run to Yavin", "Han Solo", "MEDIUM", 12)
+        
+        self.mission_queue.enqueue(mission1)
+        self.mission_queue.enqueue(mission2)
+        self.mission_queue.enqueue(mission3)
+        
+        self.active_missions = 3
+        respond "Mission queue initialized: " + str(self.active_missions + 2) + " active missions"  // Simulate more missions
+    }
+    
+    ability show_mission_status(self) {
+        respond "ACTIVE MISSIONS:"
+        // Simplified display since queue iteration is complex
+        respond "[URGENT] Death Star Intelligence - Princess Leia - ETA: 2 hours"
+        respond "[HIGH] Rebel Base Defense - General Dodonna - ETA: 6 hours"
+        respond "[MEDIUM] Supply Run to Yavin - Han Solo - ETA: 12 hours"
+        respond ""
+    }
+    
+    ability show_personnel_status(self) {
+        respond "PERSONNEL STATUS:"
+        train (holocron i = 0; i < len(self.personnel_roster); i = i + 1) {
+            self.personnel_roster[i].get_status()
+        }
+        respond ""
+    }
+    
+    ability run_intelligence_analysis(self) {
+        // Simulate encrypted intelligence
+        holocron secret_intel = force_encrypt("base64_encode", "Empire building new superweapon on Endor")
+        self.intelligence.analyze_message(secret_intel)
+        self.intelligence.generate_report()
+        respond ""
+    }
+    
+    ability calculate_navigation(self) {
+        respond "NAVIGATION DATA:"
+        
+        // Calculate escape route
+        holocron current_x = 500
+        holocron current_y = 300
+        holocron safe_x = 1200
+        holocron safe_y = 800
+        
+        holocron distance = lightsaber_distance(current_x, current_y, safe_x, safe_y)
+        respond "Distance to safe coordinates: " + str(distance) + " parsecs"
+        
+        // Calculate fuel requirements
+        holocron fuel_per_parsec = 2.5
+        holocron fuel_needed = force_calculate("multiply", distance, fuel_per_parsec)
+        respond "Fuel required: " + str(fuel_needed) + " credits"
+        
+        // Calculate travel time
+        holocron travel_speed = 120  // parsecs per hour
+        holocron travel_time = force_calculate("divide", distance, travel_speed)
+        respond "Travel time: " + str(travel_time) + " hours"
+        
+        // Route safety check
+        holocron threat_sectors = midichlorians(0, 10)
+        sense (threat_sectors < 3) {
+            respond "Route status: CLEAR"
+        } else {
+            respond "Route status: CAUTION - Imperial patrols detected"
+        }
+        respond ""
+    }
+    
+    ability system_status_check(self) {
+        respond "SYSTEM STATUS CHECK:"
+        
+        // Resource status
+        self.resources.show_status()
+        
+        // Communication systems
+        holocron comm_status = midichlorians(80, 100)
+        respond "- Communications: " + str(comm_status) + "% operational"
+        
+        // Defense systems
+        holocron shield_power = force_calculate("multiply", 85, 1.2)
+        respond "- Shield generators: " + str(shield_power) + "% power"
+        
+        // Overall status
+        sense (comm_status > 90 and shield_power > 90) {
+            respond "Mission Control Status: ALL SYSTEMS OPERATIONAL"
+        } else {
+            respond "Mission Control Status: DEGRADED PERFORMANCE"
+        }
+        respond ""
+    }
+}
+
+// Main program
+ability main() {
+    // Initialize mission control
+    holocron command_center = new MissionControl()
+    command_center.initialize_system()
+    
+    // Display mission status
+    command_center.show_mission_status()
+    
+    // Show personnel assignments
+    command_center.show_personnel_status()
+    
+    // Run intelligence analysis
+    command_center.run_intelligence_analysis()
+    
+    // Calculate navigation data
+    command_center.calculate_navigation()
+    
+    // Perform system status check
+    command_center.system_status_check()
+    
+    respond "=== End Mission Control Session ==="
+    respond "The Force will be with you, always."
+}
+
+// Run mission control
+main()
