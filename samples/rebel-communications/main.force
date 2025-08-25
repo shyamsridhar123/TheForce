@@ -1,0 +1,188 @@
+// Rebel Communications - Text Processing and Encryption Demo
+// Demonstrates string manipulation, regex, encryption, and formatting
+
+ability main() {
+    respond "=== Rebel Communications Center ==="
+    respond ""
+    
+    // Analyze incoming transmissions
+    analyze_transmission()
+    
+    // Encrypt sensitive messages
+    encrypt_messages()
+    
+    // Pattern recognition and extraction
+    pattern_analysis()
+    
+    // Message security and hashing
+    message_security()
+    
+    // Communication formatting
+    format_communications()
+    
+    respond ""
+    respond "=== Communication System Status: OPERATIONAL ==="
+}
+
+ability analyze_transmission() {
+    respond "Incoming Transmission Analysis:"
+    
+    // Original rebel message
+    holocron rebel_message = "The Death Star plans are hidden in R2-D2"
+    
+    respond "Original: " + rebel_message
+    
+    // String manipulations using protocol_droid
+    respond "Uppercase: " + protocol_droid("uppercase", rebel_message)
+    respond "Lowercase: " + protocol_droid("lowercase", rebel_message)
+    respond "Reversed: " + protocol_droid("reverse", rebel_message)
+    respond "Length: " + protocol_droid("length", rebel_message) + " characters"
+    
+    respond ""
+}
+
+ability encrypt_messages() {
+    respond "Message Encryption:"
+    
+    // Secret mission orders
+    holocron secret_mission = "Attack at dawn on the second moon"
+    respond "Original: " + secret_mission
+    
+    // Encrypt using base64
+    holocron encrypted_message = force_encrypt("base64_encode", secret_mission)
+    respond "Encrypted: " + encrypted_message
+    
+    // Decrypt to verify
+    holocron decrypted_message = force_encrypt("base64_decode", encrypted_message)
+    respond "Decrypted: " + decrypted_message
+    
+    respond ""
+}
+
+ability pattern_analysis() {
+    respond "Pattern Recognition:"
+    
+    holocron intelligence_report = "Death Star location: coordinates 127.5, 89.3. Secondary base at 45.2, 156.8"
+    
+    // Search for specific patterns
+    holocron death_star_found = regex_pattern("search", "Death Star", intelligence_report)
+    sense (death_star_found) {
+        respond "Searching for 'Death Star': Found"
+    } else {
+        respond "Searching for 'Death Star': Not Found"
+    }
+    
+    // Find coordinate patterns
+    holocron coordinates = regex_pattern("findall", "\\d+\\.\\d+", intelligence_report)
+    respond "Searching for coordinates: Found " + str(len(coordinates)) + " coordinate pairs"
+    
+    // Word count analysis
+    holocron words = regex_pattern("findall", "\\w+", intelligence_report)
+    respond "Word count: " + str(len(words)) + " words"
+    
+    respond ""
+}
+
+ability message_security() {
+    respond "Message Security:"
+    
+    holocron classified_info = "Princess Leia has the Death Star plans"
+    
+    // Create message hashes for integrity checking
+    holocron sha256_hash = force_hash("sha256", classified_info)
+    holocron md5_hash = force_hash("md5", classified_info)
+    
+    respond "SHA256 Hash: " + sha256_hash
+    respond "MD5 Hash: " + md5_hash
+    
+    // Verify message integrity (simplified)
+    holocron verification_hash = force_hash("sha256", classified_info)
+    sense (sha256_hash == verification_hash) {
+        respond "Message Integrity: VERIFIED"
+    } else {
+        respond "Message Integrity: CORRUPTED"
+    }
+    
+    respond ""
+}
+
+ability format_communications() {
+    respond "Communication Formatting:"
+    
+    // Format various types of messages
+    holocron sender = "Princess Leia"
+    holocron recipient = "Obi-Wan Kenobi"
+    holocron mission_type = "Rescue Mission"
+    holocron priority = "URGENT"
+    
+    // Simple message formatting without hologram_text
+    respond "From: " + sender + " | To: " + recipient
+    respond "Mission: " + mission_type + " | Priority: " + priority
+    
+    // Status reports
+    holocron rebel_count = 150
+    holocron imperial_threat = "High"
+    respond "Rebel Forces: " + str(rebel_count) + " | Threat Level: " + imperial_threat
+    
+    // Coordinates and tactical information
+    holocron target_coordinates = "Sector 7G"
+    holocron eta = "0800 hours"
+    respond "Target: " + target_coordinates + " | ETA: " + eta
+    
+    respond ""
+}
+
+ability advanced_text_operations() {
+    respond "Advanced Text Operations:"
+    
+    // Complex message processing
+    holocron raw_transmission = "REBEL-TRANSMISSION-CODE-BLUE-PRIORITY-ALPHA"
+    
+    // Extract parts using regex
+    holocron transmission_parts = regex_pattern("split", "-", raw_transmission)
+    respond "Transmission components: " + str(len(transmission_parts)) + " parts"
+    
+    // Message reconstruction
+    holocron organization = transmission_parts[0]
+    holocron message_type = transmission_parts[1]
+    holocron classification = transmission_parts[2]
+    
+    respond "Organization: " + protocol_droid("lowercase", organization)
+    respond "Type: " + protocol_droid("lowercase", message_type)
+    respond "Priority: " + protocol_droid("uppercase", classification)
+    
+    // Clean and format
+    holocron clean_message = protocol_droid("lowercase", raw_transmission)
+    clean_message = regex_pattern("sub", "-", clean_message, " ")
+    respond "Cleaned: " + clean_message
+    
+    respond ""
+}
+
+ability security_demonstration() {
+    respond "Security Demonstration:"
+    
+    // Multiple encryption layers
+    holocron ultra_secret = "Luke Skywalker is Vader's son"
+    
+    // First layer: base64
+    holocron layer1 = force_encrypt("base64_encode", ultra_secret)
+    respond "Layer 1 Encryption: " + layer1
+    
+    // Create security signature
+    holocron signature = force_hash("sha256", ultra_secret)
+    respond "Security Signature: " + signature
+    
+    // Simulate secure transmission validation
+    holocron received_signature = force_hash("sha256", ultra_secret)
+    sense (signature == received_signature) {
+        respond "Transmission Status: AUTHENTICATED"
+    } else {
+        respond "Transmission Status: COMPROMISED"
+    }
+    
+    respond ""
+}
+
+// Run the main communication system
+main()

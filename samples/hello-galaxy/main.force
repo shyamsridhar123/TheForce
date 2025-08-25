@@ -1,0 +1,50 @@
+// Hello Galaxy - Your First Force Program
+// This program introduces basic Force programming concepts
+
+ability main() {
+    // Opening message - classic Star Wars greeting
+    respond "A long time ago in a galaxy far, far away..."
+    
+    // Basic output
+    respond "Hello, Galaxy!"
+    respond "May the Force be with you!"
+    
+    // Variable declaration using holocron
+    holocron jedi_name = "Luke Skywalker"
+    holocron force_level = 75
+    holocron training_ready = True
+    
+    // String concatenation and output
+    respond "Welcome, " + jedi_name
+    
+    // Conditional logic using sense
+    sense (force_level > 50) {
+        respond "The Force is strong with this one!"
+    } else {
+        respond "More training is needed, young Padawan"
+    }
+    
+    // Variable output with string conversion
+    respond "Your Force level is: " + str(force_level)
+    
+    // Conditional with different data type
+    sense (training_ready) {
+        respond "Ready for Jedi training: Yes"
+    } else {
+        respond "Ready for Jedi training: No"
+    }
+    
+    // Different greeting based on Force level
+    sense (force_level >= 90) {
+        respond "You have achieved Jedi Master status!"
+    } else {
+        sense (force_level >= 70) {
+            respond "You are ready to become a Jedi Knight"
+        } else {
+            respond "Continue training, young Padawan"
+        }
+    }
+}
+
+// Run the main program
+main()

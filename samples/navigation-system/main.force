@@ -1,0 +1,230 @@
+// Galactic Navigation System - Mathematical Operations Demo
+// Demonstrates calculations, random numbers, distances, and space navigation
+
+ability main() {
+    respond "=== Galactic Navigation System ==="
+    respond ""
+    
+    // Initialize navigation system
+    initialize_coordinates()
+    
+    // Calculate distances between systems
+    distance_calculations()
+    
+    // Perform navigation calculations
+    navigation_calculations()
+    
+    // Targeting system operations
+    targeting_system()
+    
+    // Random navigation data
+    random_navigation_data()
+    
+    // Statistical analysis
+    navigation_statistics()
+    
+    respond ""
+    respond "=== Navigation System Status: ONLINE ==="
+}
+
+ability initialize_coordinates() {
+    respond "Star System Coordinates:"
+    
+    // Define major star system coordinates
+    respond "- Tatooine: (125, 890)"
+    respond "- Coruscant: (500, 500)"
+    respond "- Alderaan: (300, 200)"
+    respond "- Dagobah: (75, 925)"
+    respond "- Endor: (800, 150)"
+    
+    respond ""
+}
+
+ability distance_calculations() {
+    respond "Distance Calculations:"
+    
+    // Calculate distances between key systems
+    holocron tatooine_x = 125
+    holocron tatooine_y = 890
+    holocron coruscant_x = 500
+    holocron coruscant_y = 500
+    holocron alderaan_x = 300
+    holocron alderaan_y = 200
+    holocron endor_x = 800
+    holocron endor_y = 150
+    
+    // Distance from Tatooine to Coruscant
+    holocron distance1 = lightsaber_distance(tatooine_x, tatooine_y, coruscant_x, coruscant_y)
+    respond "Distance from Tatooine to Coruscant: " + str(distance1) + " parsecs"
+    
+    // Distance from Coruscant to Alderaan
+    holocron distance2 = lightsaber_distance(coruscant_x, coruscant_y, alderaan_x, alderaan_y)
+    respond "Distance from Coruscant to Alderaan: " + str(distance2) + " parsecs"
+    
+    // Distance from Alderaan to Endor
+    holocron distance3 = lightsaber_distance(alderaan_x, alderaan_y, endor_x, endor_y)
+    respond "Distance from Alderaan to Endor: " + str(distance3) + " parsecs"
+    
+    // Find shortest route (simplified)
+    sense (distance1 < distance2) {
+        respond "Shortest jump: Tatooine to Coruscant"
+    } else {
+        respond "Shortest jump: Coruscant to Alderaan"
+    }
+    
+    respond ""
+}
+
+ability navigation_calculations() {
+    respond "Navigation Calculations:"
+    
+    // Fuel calculations
+    holocron base_fuel_cost = 150  // credits per parsec
+    holocron journey_distance = 456  // parsecs
+    holocron fuel_needed = force_calculate("multiply", base_fuel_cost, journey_distance)
+    respond "Fuel required for journey: " + str(fuel_needed) + " credits"
+    
+    // Travel time calculations
+    holocron lightspeed_factor = 0.75  // efficiency factor
+    holocron base_time = force_calculate("divide", journey_distance, 100)  // hours
+    holocron travel_time = force_calculate("multiply", base_time, lightspeed_factor)
+    respond "Travel time at lightspeed: " + str(travel_time) + " hours"
+    
+    // Hyperspace jump calculations (simplified to avoid nested calls)
+    holocron sum_x = force_calculate("add", 125, 500)
+    holocron jump_x = force_calculate("divide", sum_x, 2)
+    holocron sum_y = force_calculate("add", 890, 200)
+    holocron jump_y = force_calculate("divide", sum_y, 2)
+    respond "Hyperspace jump coordinates: (" + str(jump_x) + ", " + str(jump_y) + ")"
+    
+    // Safety margin calculations
+    holocron safety_margin = force_calculate("multiply", fuel_needed, 0.2)
+    holocron total_fuel = force_calculate("add", fuel_needed, safety_margin)
+    respond "Total fuel with safety margin: " + str(total_fuel) + " credits"
+    
+    respond ""
+}
+
+ability targeting_system() {
+    respond "Targeting System:"
+    
+    // Target coordinates
+    holocron target_x = 1500
+    holocron target_y = 800
+    holocron ship_x = 1200
+    holocron ship_y = 600
+    
+    // Calculate range to target
+    holocron target_range = lightsaber_distance(ship_x, ship_y, target_x, target_y)
+    respond "Target acquired: Imperial Star Destroyer"
+    respond "Range: " + str(target_range) + " meters"
+    
+    // Firing solution calculations
+    holocron max_range = 3000
+    sense (target_range < max_range) {
+        respond "Firing solution calculated: SUCCESS"
+        
+        // Calculate hit probability based on range
+        holocron base_accuracy = 95
+        holocron range_penalty = force_calculate("divide", target_range, 100)
+        holocron hit_probability = force_calculate("subtract", base_accuracy, range_penalty)
+        respond "Hit probability: " + str(hit_probability) + "%"
+    } else {
+        respond "Target out of range: ABORT"
+    }
+    
+    respond ""
+}
+
+ability random_navigation_data() {
+    respond "Random Navigation Data:"
+    
+    // Generate random coordinates for exploration
+    holocron random_sector = midichlorians(100, 999)
+    respond "Random sector: " + str(random_sector)
+    
+    // Fuel variance simulation
+    holocron fuel_variance = midichlorians(-20, 20)
+    respond "Random fuel variance: " + str(fuel_variance) + "%"
+    
+    // Emergency coordinates
+    holocron emergency_x = midichlorians(0, 1000)
+    holocron emergency_y = midichlorians(0, 1000)
+    respond "Emergency coordinates: (" + str(emergency_x) + ", " + str(emergency_y) + ")"
+    
+    // Random threat level
+    holocron threat_level = midichlorians(1, 10)
+    sense (threat_level > 7) {
+        respond "Threat assessment: HIGH - Imperial presence detected"
+    } else {
+        sense (threat_level > 4) {
+            respond "Threat assessment: MODERATE - Proceed with caution"
+        } else {
+            respond "Threat assessment: LOW - Safe passage expected"
+        }
+    }
+    
+    respond ""
+}
+
+ability navigation_statistics() {
+    respond "Navigation Statistics:"
+    
+    // Simulate multiple distance measurements for analysis
+    holocron distances = squadron[456, 312, 789, 234, 567, 432, 678, 345]
+    
+    // Calculate average distance
+    holocron total_distance = 0
+    train (holocron i = 0; i < len(distances); i = i + 1) {
+        total_distance = force_calculate("add", total_distance, distances[i])
+    }
+    holocron average_distance = force_calculate("divide", total_distance, len(distances))
+    respond "Average jump distance: " + str(average_distance) + " parsecs"
+    
+    // Find minimum and maximum distances
+    holocron min_distance = distances[0]
+    holocron max_distance = distances[0]
+    
+    train (holocron i = 1; i < len(distances); i = i + 1) {
+        sense (distances[i] < min_distance) {
+            min_distance = distances[i]
+        }
+        sense (distances[i] > max_distance) {
+            max_distance = distances[i]
+        }
+    }
+    
+    respond "Minimum jump distance: " + str(min_distance) + " parsecs"
+    respond "Maximum jump distance: " + str(max_distance) + " parsecs"
+    
+    // Calculate range
+    holocron distance_range = force_calculate("subtract", max_distance, min_distance)
+    respond "Distance range: " + str(distance_range) + " parsecs"
+    
+    respond ""
+}
+
+ability advanced_calculations() {
+    respond "Advanced Calculations:"
+    
+    // Power calculations for different operations
+    holocron base_power = 10
+    holocron shield_power = force_calculate("power", base_power, 2)  // 10^2 = 100
+    respond "Shield power required: " + str(shield_power) + " units"
+    
+    // Square root calculations for optimal formations
+    holocron formation_area = 144
+    holocron formation_side = force_calculate("sqrt", formation_area)
+    respond "Optimal formation side length: " + str(formation_side) + " units"
+    
+    // Complex trajectory calculations
+    holocron velocity = 50
+    holocron time = 8
+    holocron distance = force_calculate("multiply", velocity, time)
+    respond "Calculated trajectory distance: " + str(distance) + " units"
+    
+    respond ""
+}
+
+// Run the navigation system
+main()
