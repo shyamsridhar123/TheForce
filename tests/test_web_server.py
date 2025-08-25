@@ -52,13 +52,13 @@ class TestForceWebServer(unittest.TestCase):
     
     def test_serve_css(self):
         """Test serving CSS files"""
-        response = requests.get(f'{self.base_url}/style.css')
+        response = requests.get(f'{self.base_url}/force_web_ui.css')
         self.assertEqual(response.status_code, 200)
         self.assertIn('text/css', response.headers.get('content-type', ''))
     
     def test_serve_javascript(self):
         """Test serving JavaScript files"""
-        response = requests.get(f'{self.base_url}/script.js')
+        response = requests.get(f'{self.base_url}/force_web_ui.js')
         self.assertEqual(response.status_code, 200)
         self.assertIn('javascript', response.headers.get('content-type', ''))
     

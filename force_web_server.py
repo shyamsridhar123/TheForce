@@ -23,9 +23,9 @@ class ForceWebHandler(BaseHTTPRequestHandler):
         """Serve static files or API endpoints"""
         if self.path == '/' or self.path == '/index.html':
             self.serve_file('force_web_ui.html', 'text/html')
-        elif self.path == '/style.css':
+        elif self.path == '/force_web_ui.css':
             self.serve_file('force_web_ui.css', 'text/css')
-        elif self.path == '/script.js':
+        elif self.path == '/force_web_ui.js':
             self.serve_file('force_web_ui.js', 'application/javascript')
         elif self.path == '/examples':
             self.serve_examples()

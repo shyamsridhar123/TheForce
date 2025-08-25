@@ -113,8 +113,10 @@ class ForceUI {
         
         // Example buttons
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('example-btn')) {
-                const exampleKey = e.target.getAttribute('data-example');
+            // Find the example button, whether clicked directly or on child elements
+            const exampleBtn = e.target.closest('.example-btn');
+            if (exampleBtn) {
+                const exampleKey = exampleBtn.getAttribute('data-example');
                 this.loadExample(exampleKey);
             }
         });
