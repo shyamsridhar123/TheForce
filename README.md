@@ -21,6 +21,12 @@
 
 3. **Open your browser** to `http://localhost:8000` and start exploring!
 
+4. **Try the command line** (optional):
+   ```bash
+   python force_compiler.py example.force          # Run a file
+   python force_compiler.py --interactive         # Interactive mode
+   ```
+
 ## 📖 Documentation
 
 Our documentation has been organized into a comprehensive guide:
@@ -39,17 +45,26 @@ Our documentation has been organized into a comprehensive guide:
 ## ✨ What's New
 
 ### 🚀 **Major Language Enhancements**
-- **Advanced Data Structures**: Stacks, queues, and tuples
-- **JSON Processing**: Full JSON support with `data_stream`
-- **Security & Encryption**: Base64 and hashing with `force_encrypt`
-- **Regular Expressions**: Pattern matching with `regex_pattern`
-- **Switch-Case Logic**: Decision making with `jedi_council`
+- **Advanced Data Structures**: Stacks (`stack_tower`), Queues (`queue_line`), and Tuples (`tuple_coordinates`)
+- **JSON Processing**: Full JSON support with `data_stream` operations
+- **Date & Time Operations**: Galactic time management with `galactic_time`
+- **Security & Encryption**: Base64 encoding/decoding and hashing with `force_encrypt` and `force_hash`
+- **Regular Expressions**: Pattern matching with `regex_pattern` operations
+- **Switch-Case Logic**: Advanced decision making with `jedi_council`
 
 ### 🎨 **Enhanced Web Interface**
-- **Theme Toggle**: Dark Side and Light Side themes
+- **Theme Toggle**: Switch between Dark Side and Light Side themes
 - **7 Interactive Examples**: From basic syntax to advanced features
-- **Export Functionality**: Download your `.force` programs
+- **Enhanced Quick Reference**: Organized by categories with all new keywords
+- **Export Functionality**: Download your `.force` programs as `.force` files
+- **Improved UI Design**: Better organized sidebar with grouped references
 - **Keyboard Shortcuts**: Full keyboard support for power users
+
+### 🧪 **Comprehensive Testing**
+- **67 Unit Tests** with extensive feature coverage
+- **Automated Testing Framework** for continuous validation
+- **Integration Tests** for web server functionality  
+- **Feature-Specific Tests** for all new language constructs
 
 ## 🔥 Quick Example
 
@@ -74,20 +89,43 @@ respond "May the Force be with you!"
 
 ## 🧪 Testing & Quality
 
-- ✅ **49 Total Tests** with 100% pass rate
-- ✅ **Comprehensive Test Coverage** for all features
+- ✅ **67 Total Tests** with 95.5% pass rate
+- ✅ **Comprehensive Test Coverage** for all features  
 - ✅ **Automated Testing Framework** for continuous validation
+- ✅ **Integration Tests** for web server functionality
+- ✅ **Feature-Specific Tests** for all new language constructs
 
 Run tests with: `python tests/run_tests.py`
+
+## 📋 Sample Programs
+
+Explore practical examples in the [`samples/`](samples/) directory:
+
+- **🌟 [hello-galaxy](samples/hello-galaxy/)** - Basic syntax and variables
+- **⚔️ [jedi-academy](samples/jedi-academy/)** - Object-oriented programming with classes
+- **🗃️ [galactic-database](samples/galactic-database/)** - Data structures and collections
+- **📡 [rebel-communications](samples/rebel-communications/)** - Text processing and encryption
+- **🧮 [navigation-system](samples/navigation-system/)** - Mathematical operations
+- **🚀 [mission-control](samples/mission-control/)** - Complex application showcase
+
+Each sample includes detailed documentation and demonstrates different aspects of The Force language.
 
 ## 🌟 Key Features
 
 - **Star Wars Themed Syntax**: Learn programming with Jedi, Sith, and galactic terminology
 - **Python Transpilation**: Your Force code runs as optimized Python
-- **Interactive Web IDE**: Code in a beautiful, space-themed interface
-- **Educational Focus**: Perfect for learning programming concepts
-- **Comprehensive Documentation**: Detailed guides and examples
+- **Interactive Web IDE**: Code in a beautiful, space-themed interface with theme toggle
+- **Educational Focus**: Perfect for learning programming concepts in an engaging way
+- **Advanced Data Structures**: Support for stacks, queues, tuples, and JSON processing
+- **Security Features**: Built-in encryption and hashing capabilities
+- **Pattern Matching**: Regular expression support for text processing
+- **Comprehensive Documentation**: Detailed guides, examples, and API reference
 - **Active Development**: Regular updates and new features
+- **Cross-Platform**: Works on Windows, macOS, and Linux
+
+## 🎯 Language Philosophy
+
+The Force Programming Language bridges the gap between entertainment and education by using familiar Star Wars terminology to make programming concepts more accessible and memorable. Whether you're a Padawan learning your first programming concepts or a Jedi Master exploring advanced techniques, The Force provides an engaging way to develop coding skills while having fun with the galaxy far, far away.
 
 ## 🤝 Community
 
